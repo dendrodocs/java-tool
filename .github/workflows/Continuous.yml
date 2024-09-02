@@ -21,7 +21,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run the Maven verify phase
-        run: mvn clean test verify -e --update-snapshots
+        run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
+      - name: Report Coveralls
+          uses: coverallsapp/github-action@v2
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v4
         with:
