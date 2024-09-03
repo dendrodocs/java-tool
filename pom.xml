@@ -158,6 +158,17 @@
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
                 <configuration>
+                    <java>
+                        <googleJavaFormat>
+                            <version>1.23.0</version>
+                            <style>GOOGLE</style>
+                            <reflowLongStrings>true</reflowLongStrings>
+                            <formatJavadoc>false</formatJavadoc>
+                        </googleJavaFormat>
+                        <importOrder>
+                            <semanticSort>true</semanticSort>
+                        </importOrder>
+                    </java>
                     <pom>
                         <sortPom>
                             <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
