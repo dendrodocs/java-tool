@@ -7,6 +7,36 @@
     <artifactId>tool</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
+    <name>DendroDocs Tool</name>
+    <description>Tool to analyze a solution and output the detected code structure to enable rendering.</description>
+    <url>https://github.com/dendrodocs/java-tool</url>
+
+    <organization>
+        <name>DendroDocs</name>
+        <url>https://github.com/dendrodocs</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/mit</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mhompus</id>
+            <name>Michaël Hompus</name>
+            <email>michael@hompus.nl</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/dendrodocs/java-tool.git</connection>
+        <developerConnection>scm:git:ssh://github.com:dendrodocs/java-tool.git</developerConnection>
+        <url>https://github.com/dendrodocs/java-tool/tree/master</url>
+    </scm>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
