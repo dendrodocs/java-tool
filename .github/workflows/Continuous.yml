@@ -23,6 +23,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Run the Maven verify phase
         run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
       - name: Report Coveralls
@@ -33,6 +35,7 @@ jobs:
           name: Package
           path: staging
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
