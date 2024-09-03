@@ -27,6 +27,8 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Run the Maven verify phase
         run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
       - name: Report Coveralls
         uses: coverallsapp/github-action@v2
       - run: mkdir staging && cp target/*.jar staging
@@ -35,7 +37,7 @@ jobs:
           name: Package
           path: staging
       - name: Publish package
-        run: mvn deploy
+        run: mvn deploy --no-transfer-progress -DskipPublishing
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
