@@ -23,8 +23,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Run the Maven verify phase
         run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
       - name: Report Coveralls
         uses: coverallsapp/github-action@v2
       - run: mkdir staging && cp target/*.jar staging
@@ -36,3 +40,4 @@ jobs:
         run: mvn deploy --no-transfer-progress
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
