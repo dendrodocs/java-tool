@@ -15,9 +15,10 @@ class ConstructorDescriptionJsonTest {
   void constructor_description_serializes_as_expected() throws IOException {
     assertEquals(
         mapper.readTree("{\"Name\":\"Foo\",\"Parameters\":[{\"Name\":\"bar\",\"Type\":\"Baz\"}]}"),
-        mapper.valueToTree(new ConstructorDescription(
-            new MemberDescription("Foo"),
-            List.of(new ParameterDescription("Baz", "bar", List.of())), List.of()))
-    );
+        mapper.valueToTree(
+            new ConstructorDescription(
+                new MemberDescription("Foo"),
+                List.of(new ParameterDescription("Baz", "bar", List.of())),
+                List.of())));
   }
 }

@@ -15,21 +15,11 @@ import java.util.List;
  * @param comments     JavaDoc comments in an {@link DocumentationCommentsDescription}.
  */
 public record MemberDescription(
-    @JsonProperty("Name")
-    String name,
-
-    @JsonProperty("Modifiers")
-    @JsonInclude(Include.NON_DEFAULT)
-    int modifiers,
-
-    @JsonProperty("Attributes")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> attributes,
-
-    @JsonProperty("DocumentationComments")
-    @JsonInclude(Include.NON_NULL)
-    Description comments
-) implements Description {
+    @JsonProperty("Name") String name,
+    @JsonProperty("Modifiers") @JsonInclude(Include.NON_DEFAULT) int modifiers,
+    @JsonProperty("Attributes") @JsonInclude(Include.NON_EMPTY) List<Description> attributes,
+    @JsonProperty("DocumentationComments") @JsonInclude(Include.NON_NULL) Description comments)
+    implements Description {
 
   /**
    * Constructor that takes only a name. The modifiers value is set to {@link Modifier#NONE}, list

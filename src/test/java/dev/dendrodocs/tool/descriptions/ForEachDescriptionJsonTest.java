@@ -13,7 +13,8 @@ class ForEachDescriptionJsonTest {
 
   @Test
   void foreach_description_serializes_as_expected() throws IOException {
-    String expected = """
+    String expected =
+        """
         {
           "$type": "DendroDocs.ForEach, DendroDocs.Shared",
           "Expression": "String piece : pieces",

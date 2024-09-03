@@ -18,13 +18,14 @@ class JsonnetQuirkTest {
    */
   @Test
   void type_metadata_comes_first() throws IOException {
-    List<Description> descriptions = List.of(
-        new AssignmentDescription("a", "=", "b"),
-        new ForEachDescription("var x : xs", List.of()),
-        new IfDescription(List.of()),
-        new InvocationDescription("java.lang.Object", "toString", List.of()),
-        new ReturnDescription("1"),
-        new SwitchDescription("var", List.of()));
+    List<Description> descriptions =
+        List.of(
+            new AssignmentDescription("a", "=", "b"),
+            new ForEachDescription("var x : xs", List.of()),
+            new IfDescription(List.of()),
+            new InvocationDescription("java.lang.Object", "toString", List.of()),
+            new ReturnDescription("1"),
+            new SwitchDescription("var", List.of()));
 
     for (Description description : descriptions) {
       String json = mapper.writeValueAsString(description);
@@ -33,5 +34,4 @@ class JsonnetQuirkTest {
       assertTrue(json.startsWith("{\"$type\":"), "JSON does not start with $type field: " + json);
     }
   }
-
 }

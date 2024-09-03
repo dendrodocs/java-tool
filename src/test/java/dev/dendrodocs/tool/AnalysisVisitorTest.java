@@ -141,10 +141,7 @@ class AnalysisVisitorTest {
             new TypeDescription.Builder(TypeType.INTERFACE, "Ala")
                 .withMembers(
                     new MethodDescription(
-                        new MemberDescription("kazam"),
-                        null,
-                        List.of(),
-                        List.of()))
+                        new MemberDescription("kazam"), null, List.of(), List.of()))
                 .build()),
         parse("interface Ala { void kazam(); }"));
   }
@@ -236,16 +233,16 @@ class AnalysisVisitorTest {
   void switch_statement() {
     String fragment =
         """
-            switch (bongo) {
-              case 1:
-                return 2;
-              case 3:
-              case 4:
-                return 5;
-              default:
-                return 6;
-            }
-            """;
+        switch (bongo) {
+          case 1:
+            return 2;
+          case 3:
+          case 4:
+            return 5;
+          default:
+            return 6;
+        }
+        """;
     assertIterableEquals(
         List.of(
             new SwitchDescription(
@@ -290,20 +287,25 @@ class AnalysisVisitorTest {
         parse("/* Non-java-doc comment */ enum TestEnum { }"));
 
     assertIterableEquals(
-        List.of(new TypeDescription.Builder(TypeType.CLASS, "TestClass")
-            .withMembers(new FieldDescription(new MemberDescription("foo"), "int", null)).build()),
+        List.of(
+            new TypeDescription.Builder(TypeType.CLASS, "TestClass")
+                .withMembers(new FieldDescription(new MemberDescription("foo"), "int", null))
+                .build()),
         parse("class TestClass { /* Not Javadoc */ int foo; }"));
 
     assertIterableEquals(
-        List.of(new TypeDescription.Builder(TypeType.INTERFACE, "TestInterface")
-            .withComment(new DocumentationCommentsDescription("Bar.", null, "Foo.", null, null))
-            .build()),
+        List.of(
+            new TypeDescription.Builder(TypeType.INTERFACE, "TestInterface")
+                .withComment(new DocumentationCommentsDescription("Bar.", null, "Foo.", null, null))
+                .build()),
         parse("/** Foo. Bar. */ interface TestInterface {}"));
 
     assertIterableEquals(
-        List.of(new TypeDescription.Builder(TypeType.STRUCT, "org.example.TestRecord")
-            .withComment(new DocumentationCommentsDescription(null, null, "Present.", null, null))
-            .build()),
+        List.of(
+            new TypeDescription.Builder(TypeType.STRUCT, "org.example.TestRecord")
+                .withComment(
+                    new DocumentationCommentsDescription(null, null, "Present.", null, null))
+                .build()),
         parse("/** Ignored. */ package org.example; /** Present. */ record TestRecord() {}"));
 
     assertIterableEquals(
@@ -311,7 +313,10 @@ class AnalysisVisitorTest {
             new TypeDescription.Builder(TypeType.CLASS, "Example")
                 .withMembers(
                     new MethodDescription(
-                        new MemberDescription("does", 0, List.of(),
+                        new MemberDescription(
+                            "does",
+                            0,
+                            List.of(),
                             new DocumentationCommentsDescription(
                                 "These are the remarks.",
                                 "an Example.",
@@ -329,33 +334,30 @@ class AnalysisVisitorTest {
                 .build()),
         parse(
             """
-                class Example {
-                  /**
-                   * This method is an example.main<>.
-                   * These are the remarks.
-                   * @param a is an object.
-                   * @param b is a string.
-                   * @param Map<input> map of strings.
-                   * @param <L> is a list.
-                   * @param <L<C>> list of characters.
-                   * @return an Example.
-                   */
-                  Example does(Object a, String b) {}
-                }
-                """));
+            class Example {
+              /**
+               * This method is an example.main<>.
+               * These are the remarks.
+               * @param a is an object.
+               * @param b is a string.
+               * @param Map<input> map of strings.
+               * @param <L> is a list.
+               * @param <L<C>> list of characters.
+               * @return an Example.
+               */
+              Example does(Object a, String b) {}
+            }
+            """));
   }
 
   @Test
   void package_level_comment() {
     // Ignore package-level Javadoc comments, since there is no place for them in the JSON schema.
-    assertIterableEquals(
-        List.of(),
-        parse("/** Package javadoc. */ package Playground;"));
+    assertIterableEquals(List.of(), parse("/** Package javadoc. */ package Playground;"));
 
     // Multiple top-level Javadoc comments should still be ignored.
     assertIterableEquals(
-        List.of(),
-        parse("/** First javadoc. */ /** Second javadoc. */ package Playground;"));
+        List.of(), parse("/** First javadoc. */ /** Second javadoc. */ package Playground;"));
   }
 
   @Test
@@ -363,11 +365,11 @@ class AnalysisVisitorTest {
     List<Description> parsed =
         parse(
             """
-                public final class Sandwich {
-                  private strictfp float consume() {}
-                  public static Sandwich prepare() {}
-                }
-                """);
+            public final class Sandwich {
+              private strictfp float consume() {}
+              public static Sandwich prepare() {}
+            }
+            """);
 
     var type = (TypeDescription) parsed.get(0);
     assertEquals(Modifier.PUBLIC.mask() | Modifier.SEALED.mask(), type.modifiers());
@@ -384,19 +386,19 @@ class AnalysisVisitorTest {
     List<Description> parsed =
         parse(
             """
-                class Person {
-                    private String name = "Hai";
-                    /** Test javadoc */
-                    public int age, age2 = 18;
-                    public Person(String name, int age) {
-                      this.name = name;
-                      this.age = age;
-                    }
-                    public boolean isAdult() {
-                      return this.age > 18;
-                    }
+            class Person {
+                private String name = "Hai";
+                /** Test javadoc */
+                public int age, age2 = 18;
+                public Person(String name, int age) {
+                  this.name = name;
+                  this.age = age;
                 }
-                """);
+                public boolean isAdult() {
+                  return this.age > 18;
+                }
+            }
+            """);
 
     TypeDescription description = (TypeDescription) parsed.get(0);
     List<FieldDescription> fieldDescriptions =
@@ -444,17 +446,17 @@ class AnalysisVisitorTest {
     List<Description> parsed =
         parse(
             """
-                  enum Nationality {
-                         DUTCH(5),
-                         GERMAN(10);
+              enum Nationality {
+                     DUTCH(5),
+                     GERMAN(10);
 
-                         int counter;
+                     int counter;
 
-                         Nationality(int val) {
-                           this.counter=val;
-                         }
-                       }
-                """);
+                     Nationality(int val) {
+                       this.counter=val;
+                     }
+                   }
+            """);
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
@@ -482,11 +484,13 @@ class AnalysisVisitorTest {
 
   @Test
   void annotation_declaration_without_members() {
-    List<Description> parsed = parse("""
-         public @interface AnnotationTest {
-         
-         }
-        """);
+    List<Description> parsed =
+        parse(
+            """
+             public @interface AnnotationTest {
+
+             }
+            """);
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
@@ -500,26 +504,33 @@ class AnalysisVisitorTest {
 
   @Test
   void annotation_declaration_with_annotations() {
-    List<Description> parsed = parse("""
-        import java.lang.annotation.Retention;
-        import java.lang.annotation.RetentionPolicy;
-                
-        @Retention(RetentionPolicy.RUNTIME)
-        public @interface AnnotationTest {
-               
-        }
-        """);
+    List<Description> parsed =
+        parse(
+            """
+            import java.lang.annotation.Retention;
+            import java.lang.annotation.RetentionPolicy;
+
+            @Retention(RetentionPolicy.RUNTIME)
+            public @interface AnnotationTest {
+
+            }
+            """);
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
     TypeDescription expected =
         new TypeDescription.Builder(TypeType.INTERFACE, "AnnotationTest")
             .withModifiers(Modifier.PUBLIC.mask())
-            .withAttributes(List.of(
-                new AttributeDescription("java.lang.annotation.Retention",
-                    "Retention",
-                    List.of(new AttributeArgumentDescription("value",
-                        "java.lang.annotation.RetentionPolicy", "RetentionPolicy.RUNTIME")))))
+            .withAttributes(
+                List.of(
+                    new AttributeDescription(
+                        "java.lang.annotation.Retention",
+                        "Retention",
+                        List.of(
+                            new AttributeArgumentDescription(
+                                "value",
+                                "java.lang.annotation.RetentionPolicy",
+                                "RetentionPolicy.RUNTIME")))))
             .build();
 
     assertEquals(expected, typeDescription);
@@ -527,11 +538,13 @@ class AnalysisVisitorTest {
 
   @Test
   void annotation_declaration_with_fields() {
-    List<Description> parsed = parse("""
-        public @interface AnnotationTest {
-          String testField() default "";
-        }
-        """);
+    List<Description> parsed =
+        parse(
+            """
+            public @interface AnnotationTest {
+              String testField() default "";
+            }
+            """);
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
@@ -539,11 +552,10 @@ class AnalysisVisitorTest {
     TypeDescription expected =
         new TypeDescription.Builder(TypeType.INTERFACE, "AnnotationTest")
             .withModifiers(Modifier.PUBLIC.mask())
-            .withMembers(List.of(new FieldDescription(
-                new MemberDescription("testField"),
-                "java.lang.String",
-                "\"\""
-            )))
+            .withMembers(
+                List.of(
+                    new FieldDescription(
+                        new MemberDescription("testField"), "java.lang.String", "\"\"")))
             .build();
 
     assertEquals(expected, typeDescription);
@@ -551,11 +563,13 @@ class AnalysisVisitorTest {
 
   @Test
   void annotation_declaration_with_field_no_default() {
-    List<Description> parsed = parse("""
-        public @interface AnnotationTest {
-          String testField();
-        }
-        """);
+    List<Description> parsed =
+        parse(
+            """
+            public @interface AnnotationTest {
+              String testField();
+            }
+            """);
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
@@ -563,11 +577,10 @@ class AnalysisVisitorTest {
     TypeDescription expected =
         new TypeDescription.Builder(TypeType.INTERFACE, "AnnotationTest")
             .withModifiers(Modifier.PUBLIC.mask())
-            .withMembers(List.of(new FieldDescription(
-                new MemberDescription("testField"),
-                "java.lang.String",
-                null
-            )))
+            .withMembers(
+                List.of(
+                    new FieldDescription(
+                        new MemberDescription("testField"), "java.lang.String", null)))
             .build();
 
     assertEquals(expected, typeDescription);
@@ -575,22 +588,23 @@ class AnalysisVisitorTest {
 
   @Test
   void record_as_method_argument() {
-    String code = """
-        public record TestRecord(int id, String name){            
+    String code =
+        """
+        public record TestRecord(int id, String name){
         }
-        
+
         class TestMethodCall {
           private void test(TestRecord argRecord) {
             // do nothing
           }
-          
+
           private void invokeMethod() {
             TestRecord recVar = new TestRecord(1, "string");
             test(recVar);
           }
-        
+
         }
-                
+
         """;
 
     assertDoesNotThrow(() -> parse(code));
@@ -598,7 +612,8 @@ class AnalysisVisitorTest {
 
   @Test
   void variable_declaration_with_annotation() {
-    String code = """
+    String code =
+        """
         @SuppressWarnings
             int x = 0;
             return x;
@@ -609,6 +624,3 @@ class AnalysisVisitorTest {
     assertIterableEquals(parseFragment(code), expected);
   }
 }
-
-
-

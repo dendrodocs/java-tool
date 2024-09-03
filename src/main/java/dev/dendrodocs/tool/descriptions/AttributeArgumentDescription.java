@@ -12,14 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *              at compile time.
  */
 public record AttributeArgumentDescription(
-    @JsonProperty("Name")
-    String name,
-
-    @JsonProperty("Type")
-    String type,
-
-    @JsonProperty("Value")
-    String value
-) implements Description {
-
-}
+    @JsonProperty("Name") String name,
+    @JsonProperty("Type") String type,
+    @JsonProperty("Value") String value)
+    implements Description {}

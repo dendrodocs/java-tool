@@ -14,13 +14,9 @@ import java.util.List;
  * @param statements A list of statements from the loop body.
  */
 public record ForEachDescription(
-    @JsonProperty("Expression")
-    String expression,
-
-    @JsonProperty("Statements")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> statements
-) implements Description {
+    @JsonProperty("Expression") String expression,
+    @JsonProperty("Statements") @JsonInclude(Include.NON_EMPTY) List<Description> statements)
+    implements Description {
 
   /**
    * Identifies the statement as a For Each statement.

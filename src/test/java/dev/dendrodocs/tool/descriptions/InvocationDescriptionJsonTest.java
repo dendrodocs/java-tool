@@ -13,7 +13,8 @@ class InvocationDescriptionJsonTest {
 
   @Test
   void invocation_description_serializes_as_expected() throws IOException {
-    String expected = """
+    String expected =
+        """
         {
           "$type": "DendroDocs.InvocationDescription, DendroDocs.Shared",
           "ContainingType": "java.util.ArrayList<Integer>",
@@ -29,7 +30,10 @@ class InvocationDescriptionJsonTest {
 
     assertEquals(
         mapper.readTree(expected),
-        mapper.valueToTree(new InvocationDescription(
-            "java.util.ArrayList<Integer>", "add", List.of(new ArgumentDescription("int", "1")))));
+        mapper.valueToTree(
+            new InvocationDescription(
+                "java.util.ArrayList<Integer>",
+                "add",
+                List.of(new ArgumentDescription("int", "1")))));
   }
 }

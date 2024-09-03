@@ -14,19 +14,21 @@ class MethodDescriptionJsonTest {
   @Test
   void method_description_serializes_as_expected() throws IOException {
     assertEquals(
-        mapper.readTree(
-            "{\"Modifiers\": 4, \"Name\": \"aap\", \"ReturnType\": \"Noot\"}"),
+        mapper.readTree("{\"Modifiers\": 4, \"Name\": \"aap\", \"ReturnType\": \"Noot\"}"),
         mapper.valueToTree(
             new MethodDescription(
                 new MemberDescription("aap", Modifier.PRIVATE.mask(), List.of(), null),
-                "Noot", List.of(), List.of())));
+                "Noot",
+                List.of(),
+                List.of())));
 
     assertEquals(
         mapper.readTree("{\"Name\": \"schapen\"}"),
         mapper.valueToTree(
             new MethodDescription(new MemberDescription("schapen"), null, List.of(), List.of())));
 
-    String example = """
+    String example =
+        """
         {
           "Name": "mies",
           "ReturnType": "org.example.Gans",
@@ -47,5 +49,4 @@ class MethodDescriptionJsonTest {
                     new ParameterDescription("Muis", "jip", List.of())),
                 List.of())));
   }
-
 }

@@ -14,16 +14,10 @@ import java.util.List;
  *                       the invoked method.
  */
 public record InvocationDescription(
-    @JsonProperty("ContainingType")
-    String containingType,
-
-    @JsonProperty("Name")
-    String name,
-
-    @JsonProperty("Arguments")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> arguments
-) implements Description {
+    @JsonProperty("ContainingType") String containingType,
+    @JsonProperty("Name") String name,
+    @JsonProperty("Arguments") @JsonInclude(Include.NON_EMPTY) List<Description> arguments)
+    implements Description {
 
   /**
    * Identifies the statement as an invocation.

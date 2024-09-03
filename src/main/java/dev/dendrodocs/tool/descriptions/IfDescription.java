@@ -12,10 +12,8 @@ import java.util.List;
  * @param sections A list of {@link IfElseSection}, containing the if, if else and else clauses.
  */
 public record IfDescription(
-    @JsonProperty("Sections")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> sections
-) implements Description {
+    @JsonProperty("Sections") @JsonInclude(Include.NON_EMPTY) List<Description> sections)
+    implements Description {
 
   /**
    * Identifies the statement as an If statement.

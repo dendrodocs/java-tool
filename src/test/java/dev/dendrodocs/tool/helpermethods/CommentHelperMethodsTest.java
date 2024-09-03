@@ -26,19 +26,18 @@ class CommentHelperMethodsTest {
   @Test
   void extract_param_description_test() {
 
-    JavadocBlockTag paramBlockTag1 = new JavadocBlockTag(Type.PARAM,
-        "param1 Description of param1.");
-    JavadocBlockTag paramBlockTag2 = new JavadocBlockTag(Type.PARAM,
-        "param2 Description of param2.");
-    JavadocBlockTag paramBlockTag3 = new JavadocBlockTag(Type.PARAM,
-        "L<param3> list of param3.");
+    JavadocBlockTag paramBlockTag1 =
+        new JavadocBlockTag(Type.PARAM, "param1 Description of param1.");
+    JavadocBlockTag paramBlockTag2 =
+        new JavadocBlockTag(Type.PARAM, "param2 Description of param2.");
+    JavadocBlockTag paramBlockTag3 = new JavadocBlockTag(Type.PARAM, "L<param3> list of param3.");
     JavadocDescription javadocDescription = new JavadocDescription();
     Javadoc javadoc = new Javadoc(javadocDescription);
     javadoc.addBlockTag(paramBlockTag1);
     javadoc.addBlockTag(paramBlockTag2);
     javadoc.addBlockTag(paramBlockTag3);
-    Map<String, Map<String, String>> paramDescriptions = extractParamDescriptions(
-        javadoc.toComment());
+    Map<String, Map<String, String>> paramDescriptions =
+        extractParamDescriptions(javadoc.toComment());
     assertEquals("Description of param1.", paramDescriptions.get("PARAM").get("param1"));
     assertEquals("Description of param2.", paramDescriptions.get("PARAM").get("param2"));
     assertEquals("list of param3.", paramDescriptions.get("PARAM").get("L<param3>"));
@@ -62,5 +61,4 @@ class CommentHelperMethodsTest {
     assertEquals("list of param3.", commentTypeParams.get("L<param3>"));
     assertEquals("return a string.", returns.toString());
   }
-
 }

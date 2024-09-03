@@ -13,7 +13,8 @@ class AttributeDescriptionJsonTest {
 
   @Test
   void attribute_description_serializes_as_expected() throws IOException {
-    String marker = """
+    String marker =
+        """
           {
             "Type": "java.lang.Override",
             "Name": "Override"
@@ -23,7 +24,8 @@ class AttributeDescriptionJsonTest {
         mapper.readTree(marker),
         mapper.valueToTree(new AttributeDescription("java.lang.Override", "Override", List.of())));
 
-    String normal = """
+    String normal =
+        """
           {
             "Type": "org.example.SomeAnnotation",
             "Name": "SomeAnnotation",
@@ -38,10 +40,11 @@ class AttributeDescriptionJsonTest {
         """;
     assertEquals(
         mapper.readTree(normal),
-        mapper.valueToTree(new AttributeDescription(
-            "org.example.SomeAnnotation",
-            "SomeAnnotation",
-            List.of(
-                new AttributeArgumentDescription("value", "java.lang.String", "\"hello\"")))));
+        mapper.valueToTree(
+            new AttributeDescription(
+                "org.example.SomeAnnotation",
+                "SomeAnnotation",
+                List.of(
+                    new AttributeArgumentDescription("value", "java.lang.String", "\"hello\"")))));
   }
 }

@@ -11,5 +11,4 @@ import java.util.List;
  * @param classpath absolute paths to JARs that are added to the classpath for type resolution
  * @param pretty    whether to indent the resulting JSON
  */
-public record AnalysisJob(Path project, Path output, List<String> classpath, boolean pretty) {
-}
+public record AnalysisJob(Path project, Path output, List<String> classpath, boolean pretty) {}

@@ -13,7 +13,8 @@ class DocumentationCommentsDescriptionJsonTest {
 
   @Test
   void comment_summary_description_serializes_as_expected() throws IOException {
-    String example = """
+    String example =
+        """
         {
           "Remarks": "tread carefully.\\r\\nWhen you code.",
           "Returns": "An integer.",
@@ -33,9 +34,16 @@ class DocumentationCommentsDescriptionJsonTest {
         mapper.readTree(example),
         mapper.valueToTree(
             new DocumentationCommentsDescription(
-                "tread carefully.\r\nWhen you code.", "An integer.", "add two values",
-                Map.of("N", "first integer value", "Y", "second integer value",
-                    "Map<input>", "map of strings."),
+                "tread carefully.\r\nWhen you code.",
+                "An integer.",
+                "add two values",
+                Map.of(
+                    "N",
+                    "first integer value",
+                    "Y",
+                    "second integer value",
+                    "Map<input>",
+                    "map of strings."),
                 Map.of("L", "of type list.", "L<C>", "list of characters."))));
   }
 }

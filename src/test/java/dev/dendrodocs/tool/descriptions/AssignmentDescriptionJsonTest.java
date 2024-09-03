@@ -12,7 +12,8 @@ class AssignmentDescriptionJsonTest {
 
   @Test
   void assignment_description_serializes_as_expected() throws IOException {
-    String expected = """
+    String expected =
+        """
           {
             "$type": "DendroDocs.AssignmentDescription, DendroDocs.Shared",
             "Left": "ringo",

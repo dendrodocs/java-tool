@@ -13,7 +13,8 @@ class SwitchDescriptionJsonTest {
 
   @Test
   void switch_description_serializes_as_expected() throws IOException {
-    String expected = """
+    String expected =
+        """
         {
           "$type": "DendroDocs.Switch, DendroDocs.Shared",
           "Expression": "season",
@@ -41,9 +42,12 @@ class SwitchDescriptionJsonTest {
 
     assertEquals(
         mapper.readTree(expected),
-        mapper.valueToTree(new SwitchDescription("season", List.of(
-            new SwitchSection(List.of("Spring"), List.of(new ReturnDescription(""))),
-            new SwitchSection(List.of("Summer"), List.of()),
-            new SwitchSection(List.of("default"), List.of(new ReturnDescription("")))))));
+        mapper.valueToTree(
+            new SwitchDescription(
+                "season",
+                List.of(
+                    new SwitchSection(List.of("Spring"), List.of(new ReturnDescription(""))),
+                    new SwitchSection(List.of("Summer"), List.of()),
+                    new SwitchSection(List.of("default"), List.of(new ReturnDescription("")))))));
   }
 }

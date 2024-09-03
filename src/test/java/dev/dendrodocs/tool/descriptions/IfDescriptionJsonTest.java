@@ -13,7 +13,8 @@ class IfDescriptionJsonTest {
 
   @Test
   void if_description_serializes_as_expected() throws IOException {
-    String expected = """
+    String expected =
+        """
         {
           "$type": "DendroDocs.If, DendroDocs.Shared",
           "Sections": [
@@ -39,9 +40,11 @@ class IfDescriptionJsonTest {
 
     assertEquals(
         mapper.readTree(expected),
-        mapper.valueToTree(new IfDescription(List.of(
-            new IfElseSection("true", List.of(new ReturnDescription("1"))),
-            new IfElseSection("false", List.of()),
-            new IfElseSection(null, List.of(new ReturnDescription("2")))))));
+        mapper.valueToTree(
+            new IfDescription(
+                List.of(
+                    new IfElseSection("true", List.of(new ReturnDescription("1"))),
+                    new IfElseSection("false", List.of()),
+                    new IfElseSection(null, List.of(new ReturnDescription("2")))))));
   }
 }

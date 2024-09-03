@@ -12,13 +12,9 @@ import java.util.List;
  * @param sections   A list of {@link SwitchSection}, one for each case in the switch.
  */
 public record SwitchDescription(
-    @JsonProperty("Expression")
-    String expression,
-
-    @JsonProperty("Sections")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> sections
-) implements Description {
+    @JsonProperty("Expression") String expression,
+    @JsonProperty("Sections") @JsonInclude(Include.NON_EMPTY) List<Description> sections)
+    implements Description {
 
   /**
    * Identifies the statement as a switch.

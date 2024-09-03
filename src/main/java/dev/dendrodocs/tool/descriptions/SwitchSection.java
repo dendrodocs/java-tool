@@ -13,13 +13,6 @@ import java.util.List;
  * @param statements List of statements from the case body.
  */
 public record SwitchSection(
-    @JsonProperty("Labels")
-    @JsonInclude(Include.NON_EMPTY)
-    List<String> labels,
-
-    @JsonProperty("Statements")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> statements
-) implements Description {
-
-}
+    @JsonProperty("Labels") @JsonInclude(Include.NON_EMPTY) List<String> labels,
+    @JsonProperty("Statements") @JsonInclude(Include.NON_EMPTY) List<Description> statements)
+    implements Description {}

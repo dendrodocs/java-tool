@@ -15,20 +15,8 @@ import java.util.List;
  * @param statements List of statements from the method body.
  */
 public record MethodDescription(
-    @JsonUnwrapped
-    MemberDescription member,
-
-    @JsonProperty("ReturnType")
-    @JsonInclude(Include.NON_EMPTY)
-    String returnType,
-
-    @JsonProperty("Parameters")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> parameters,
-
-    @JsonProperty("Statements")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> statements
-) implements Description {
-
-}
+    @JsonUnwrapped MemberDescription member,
+    @JsonProperty("ReturnType") @JsonInclude(Include.NON_EMPTY) String returnType,
+    @JsonProperty("Parameters") @JsonInclude(Include.NON_EMPTY) List<Description> parameters,
+    @JsonProperty("Statements") @JsonInclude(Include.NON_EMPTY) List<Description> statements)
+    implements Description {}

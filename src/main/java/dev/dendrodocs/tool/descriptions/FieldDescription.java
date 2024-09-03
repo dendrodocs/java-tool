@@ -12,17 +12,7 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
  * @param initialValue The explicit initialization value (string).
  */
 public record FieldDescription(
-
-    @JsonUnwrapped
-    MemberDescription member,
-
-    @JsonProperty("Type")
-    String type,
-
-    @JsonProperty("Initializer")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    String initialValue
-
-) implements Description {
-
-}
+    @JsonUnwrapped MemberDescription member,
+    @JsonProperty("Type") String type,
+    @JsonProperty("Initializer") @JsonInclude(JsonInclude.Include.NON_EMPTY) String initialValue)
+    implements Description {}

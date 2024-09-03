@@ -12,13 +12,15 @@ class ReturnDescriptionJsonTest {
 
   @Test
   void return_description_serializes_as_expected() throws IOException {
-    String plain = """
+    String plain =
+        """
         {
           "$type": "DendroDocs.ReturnDescription, DendroDocs.Shared",
           "Expression": ""
         }
         """;
-    String value = """
+    String value =
+        """
         {
           "$type": "DendroDocs.ReturnDescription, DendroDocs.Shared",
           "Expression": "1"

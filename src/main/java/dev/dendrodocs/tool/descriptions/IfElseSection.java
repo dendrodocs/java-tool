@@ -13,13 +13,6 @@ import java.util.List;
  * @param statements A list of statements from the clause body.
  */
 public record IfElseSection(
-    @JsonProperty("Condition")
-    @JsonInclude(Include.NON_NULL)
-    String condition,
-
-    @JsonProperty("Statements")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> statements
-) implements Description {
-
-}
+    @JsonProperty("Condition") @JsonInclude(Include.NON_NULL) String condition,
+    @JsonProperty("Statements") @JsonInclude(Include.NON_EMPTY) List<Description> statements)
+    implements Description {}

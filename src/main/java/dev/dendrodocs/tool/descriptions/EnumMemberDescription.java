@@ -14,12 +14,7 @@ import java.util.List;
  *                  relevant).
  */
 public record EnumMemberDescription(
-    @JsonUnwrapped
-    MemberDescription member,
-    @JsonProperty("Arguments")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    List<Description> arguments
-
-) implements Description {
-
-}
+    @JsonUnwrapped MemberDescription member,
+    @JsonProperty("Arguments") @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        List<Description> arguments)
+    implements Description {}

@@ -14,16 +14,7 @@ import java.util.List;
  * @param statements List of statements from the constructor body.
  */
 public record ConstructorDescription(
-    @JsonUnwrapped
-    MemberDescription member,
-
-    @JsonProperty("Parameters")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> parameters,
-
-    @JsonProperty("Statements")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> statements
-) implements Description {
-
-}
+    @JsonUnwrapped MemberDescription member,
+    @JsonProperty("Parameters") @JsonInclude(Include.NON_EMPTY) List<Description> parameters,
+    @JsonProperty("Statements") @JsonInclude(Include.NON_EMPTY) List<Description> statements)
+    implements Description {}

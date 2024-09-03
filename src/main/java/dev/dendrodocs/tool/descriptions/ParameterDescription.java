@@ -14,15 +14,7 @@ import java.util.List;
  * @param attributes List of parameter annotations ({@link AttributeDescription}).
  */
 public record ParameterDescription(
-    @JsonProperty("Type")
-    String type,
-
-    @JsonProperty("Name")
-    String name,
-
-    @JsonProperty("Attributes")
-    @JsonInclude(Include.NON_EMPTY)
-    List<Description> attributes
-) implements Description {
-
-}
+    @JsonProperty("Type") String type,
+    @JsonProperty("Name") String name,
+    @JsonProperty("Attributes") @JsonInclude(Include.NON_EMPTY) List<Description> attributes)
+    implements Description {}

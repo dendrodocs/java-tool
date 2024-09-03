@@ -14,15 +14,7 @@ import java.util.List;
  *                  annotation.
  */
 public record AttributeDescription(
-    @JsonProperty("Type")
-    String type,
-
-    @JsonProperty("Name")
-    String name,
-
-    @JsonInclude(Include.NON_EMPTY)
-    @JsonProperty("Arguments")
-    List<Description> arguments
-) implements Description {
-
-}
+    @JsonProperty("Type") String type,
+    @JsonProperty("Name") String name,
+    @JsonInclude(Include.NON_EMPTY) @JsonProperty("Arguments") List<Description> arguments)
+    implements Description {}

@@ -11,15 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param right    Right-hand side of the assignment as a string.
  */
 public record AssignmentDescription(
-    @JsonProperty("Left")
-    String left,
-
-    @JsonProperty("Operator")
-    String operator,
-
-    @JsonProperty("Right")
-    String right
-) implements Description {
+    @JsonProperty("Left") String left,
+    @JsonProperty("Operator") String operator,
+    @JsonProperty("Right") String right)
+    implements Description {
 
   /**
    * Identifies the statement as an assignment.
