@@ -23,7 +23,7 @@ jobs:
       - name: Run the Maven verify phase
         run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
       - name: Report Coveralls
-          uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@v2
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v4
         with:
