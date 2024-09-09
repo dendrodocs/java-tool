@@ -46,6 +46,7 @@
   </distributionManagement>
 
   <properties>
+    <gpg.skip>true</gpg.skip>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -249,6 +250,9 @@
   <profiles>
     <profile>
       <id>publish</id>
+      <properties>
+        <gpg.skip>false</gpg.skip>
+      </properties>
       <build>
         <plugins>
           <plugin>
