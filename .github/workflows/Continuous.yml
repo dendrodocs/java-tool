@@ -35,6 +35,6 @@ jobs:
           name: Package
           path: staging
       - name: Publish package
-        run: mvn deploy --no-transfer-progress
+        run: mvn deploy -Dmaven.install.skip=true --no-transfer-progress
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

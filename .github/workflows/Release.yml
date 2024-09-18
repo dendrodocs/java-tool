@@ -20,7 +20,7 @@ jobs:
       - name: Update version in pom.xml
         run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
       - name: Publish package
-        run: mvn deploy -P publish --no-transfer-progress
+        run: mvn deploy -P publish -Dmaven.install.skip=true --no-transfer-progress
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
