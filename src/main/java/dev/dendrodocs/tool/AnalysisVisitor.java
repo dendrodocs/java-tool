@@ -24,8 +24,7 @@ import java.util.Map;
 /**
  * AnalysisVisitor converts a JavaParser parse tree into a list of {@link Description} objects. The
  * resulting Descriptions may in turn have lists of children, forming a tree. Only the subset of the
- * AST that is relevant for LivingDocumentation is described. Types are resolved to their fully
- * qualified names.
+ * AST that is relevant for DendroDocs is described. Types are resolved to their fully qualified names.
  */
 public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Analyzer> {
 
@@ -80,12 +79,12 @@ public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Anal
     return types.stream().map(this::resolve).toList();
   }
 
-  /** Computes an OR-combined LivingDocumentation bitmask for a NodeList of JavaParser Modifiers. */
+  /** Computes an OR-combined DendroDocs bitmask for a NodeList of JavaParser Modifiers. */
   private int combine(NodeList<com.github.javaparser.ast.Modifier> modifiers) {
     return modifiers.stream().mapToInt(m -> Modifier.valueOf(m).mask()).reduce(0, (a, b) -> a | b);
   }
 
-  /** Describes an annotation (Java) as an Attribute (LivingDocumentation) with given arguments. */
+  /** Describes an annotation (Java) as an Attribute (DendroDocs) with given arguments. */
   private List<Description> visitAnnotation(AnnotationExpr n, List<Description> args) {
     String type = resolve(n);
     return List.of(new AttributeDescription(type, n.getNameAsString(), args));
@@ -332,7 +331,7 @@ public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Anal
     if (n.hasElseBranch()) {
       List<Description> alternative = n.getElseStmt().orElseThrow().accept(this, arg);
 
-      /* Flatten if-else trees. In LivingDocumentation JSON, a big tree of if-else structures "goes
+      /* Flatten if-else trees. In DendroDocs JSON, a big tree of if-else structures "goes
        * with" the topmost if; instead of each if having one or two branches, we think of it having
        * many branches. */
       if (n.hasCascadingIfStmt() && alternative.get(0) instanceof IfDescription alt) {
@@ -359,7 +358,7 @@ public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Anal
     return List.of(new SwitchDescription(head, n.getEntries().accept(this, arg)));
   }
 
-  /** Describe a single <code>switch</code> entry (JavaParser) or section (LivingDocumentation). */
+  /** Describe a single <code>switch</code> entry (JavaParser) or section (DendroDocs). */
   @Override
   public List<Description> visit(SwitchEntry n, Analyzer arg) {
     List<String> labels = n.getLabels().stream().map(Node::toString).toList();

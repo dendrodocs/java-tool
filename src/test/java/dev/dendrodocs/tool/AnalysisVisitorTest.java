@@ -548,7 +548,7 @@ class AnalysisVisitorTest {
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
-    // Note that an AnnotationMember is mapped to a living documentation Field
+    // Note that an AnnotationMember is mapped to a DendroDocs Field
     TypeDescription expected =
         new TypeDescription.Builder(TypeType.INTERFACE, "AnnotationTest")
             .withModifiers(Modifier.PUBLIC.mask())
@@ -573,7 +573,7 @@ class AnalysisVisitorTest {
 
     TypeDescription typeDescription = (TypeDescription) parsed.get(0);
 
-    // Note that an AnnotationMember is mapped to a living documentation Field
+    // Note that an AnnotationMember is mapped to a DendroDocs Field
     TypeDescription expected =
         new TypeDescription.Builder(TypeType.INTERFACE, "AnnotationTest")
             .withModifiers(Modifier.PUBLIC.mask())

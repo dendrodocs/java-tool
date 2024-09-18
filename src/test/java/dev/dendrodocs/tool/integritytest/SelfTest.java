@@ -14,7 +14,7 @@ class SelfTest {
   @SuppressWarnings("ResultOfMethodCallIgnored")
   void testMain() throws IOException {
     String outputJson = "parserTest.json";
-    // returns path..\ISEP-LivingDocumentation\analyzer-java
+    // returns absolute path to directory where the project is stored
     String projectRoot = System.getProperty("user.dir");
     String projectDirectory =
         projectRoot + File.separator + "src" + File.separator + "main" + File.separator + "java";
