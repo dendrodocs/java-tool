@@ -24,7 +24,7 @@ import net.jimblackler.jsonschemafriend.Validator;
 /**
  * Analyzer executes {@link AnalysisJob} instances. It walks the given source directory, parses each
  * Java file, then uses the {@link AnalysisVisitor} to combine the resulting parse trees into a JSON
- * output that follows LivingDocumentation conventions.
+ * output that follows DendroDocs conventions.
  */
 public class Analyzer {
   private final ObjectMapper objectMapper;
