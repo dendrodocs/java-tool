@@ -74,7 +74,7 @@
     <dependency>
       <groupId>net.jimblackler.jsonschemafriend</groupId>
       <artifactId>core</artifactId>
-      <version>0.12.4</version>
+      <version>0.12.5</version>
       <scope>compile</scope>
     </dependency>
 
