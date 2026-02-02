@@ -249,13 +249,13 @@
               <entryPoints>
                 <entryPoint>dev.dendrodocs.tool.Main</entryPoint>
               </entryPoints>
-              <shadedClassifierName></shadedClassifierName>
+              <shadedClassifierName />
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <mainClass>dev.dendrodocs.tool.Main</mainClass>
                 </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"></transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"></transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer" />
               </transformers>
             </configuration>
           </execution>
