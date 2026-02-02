@@ -5,7 +5,7 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.*;
-import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.comments.TraditionalJavadocComment;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
@@ -398,7 +398,8 @@ public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Anal
   }
 
   /** Describe a doc comment as a {@link DocumentationCommentsDescription}. */
-  public List<Description> visit(JavadocComment n, Analyzer arg) {
+  @Override
+  public List<Description> visit(TraditionalJavadocComment n, Analyzer arg) {
     StringBuilder returns = new StringBuilder();
     Map<String, String> commentParams = new LinkedHashMap<>();
     Map<String, String> commentTypeParams = new LinkedHashMap<>();
