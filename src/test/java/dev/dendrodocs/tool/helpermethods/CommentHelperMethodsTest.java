@@ -5,7 +5,7 @@ import static dev.dendrodocs.tool.helpermethods.CommentHelperMethods.extractSumm
 import static dev.dendrodocs.tool.helpermethods.CommentHelperMethods.processCommentData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.comments.TraditionalJavadocComment;
 import com.github.javaparser.javadoc.Javadoc;
 import com.github.javaparser.javadoc.JavadocBlockTag;
 import com.github.javaparser.javadoc.JavadocBlockTag.Type;
@@ -19,7 +19,7 @@ class CommentHelperMethodsTest {
 
   @Test
   void extract_summary_test() {
-    JavadocComment javadocComment = new JavadocComment("This is a remark.");
+    TraditionalJavadocComment javadocComment = new TraditionalJavadocComment("This is a remark.");
     assertEquals("This is a remark.", extractSummary(javadocComment));
   }
 
