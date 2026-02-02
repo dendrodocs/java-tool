@@ -398,7 +398,6 @@ public class AnalysisVisitor extends GenericListVisitorAdapter<Description, Anal
   }
 
   /** Describe a doc comment as a {@link DocumentationCommentsDescription}. */
-  @Override
   public List<Description> visit(JavadocComment n, Analyzer arg) {
     StringBuilder returns = new StringBuilder();
     Map<String, String> commentParams = new LinkedHashMap<>();
