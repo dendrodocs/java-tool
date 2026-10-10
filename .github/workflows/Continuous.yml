@@ -8,34 +8,66 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: continuous-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
-  ubuntu-latest:
-    name: ubuntu-latest
-    runs-on: ubuntu-latest
+  verify:
+    name: Verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up JDK 21
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        with:
+          java-version: '21'
+          distribution: temurin
+          cache: maven
+      - name: Run the Maven verify phase
+        run: mvn --batch-mode --no-transfer-progress verify jacoco:report -Dgpg.skip=true
+      - name: Report Coveralls
+        uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # v2.3.8
+      - name: Stage package artifacts
+        run: mkdir staging && cp target/*.jar staging/
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: java-tool-package
+          path: staging/*.jar
+          if-no-files-found: error
+
+  publish-github-packages:
+    name: Publish to GitHub Packages
+    if: github.repository == 'dendrodocs/java-tool' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     permissions:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up JDK 21 and GitHub Packages credentials
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-      - name: Run the Maven verify phase
-        run: mvn verify jacoco:report -e --update-snapshots --no-transfer-progress
-        env:
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-      - name: Report Coveralls
-        uses: coverallsapp/github-action@v2
-      - run: mkdir staging && cp target/*.jar staging
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Package
-          path: staging
+          distribution: temurin
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
       - name: Publish package
-        if: "${{ github.head_ref == '' }}"
-        run: mvn deploy -Dmaven.install.skip=true --no-transfer-progress
+        run: mvn --batch-mode --no-transfer-progress deploy -Dmaven.install.skip=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
